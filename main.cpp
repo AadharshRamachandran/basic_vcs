@@ -834,10 +834,15 @@ struct VersionControl
     }
     
     void push(const std::string &remote) {
-        const std::string zipFile = "vcs.zip";
+        const std::string zipFile = "vcs_push.zip";
         std::string remoteUrl = remote.empty() ? getRemote() : remote;
+        
         if (remoteUrl.empty()) {
-            std::cerr << "No remote URL configured.\n";
+            std::cerr << "Error: No remote URL configured.\n";
+            std::cerr << "You need to either:\n";
+            std::cerr << "1. Clone first: ./vcs clone <remote-url> <dir>\n";
+            std::cerr << "2. Or specify remote: ./vcs push <remote-url>\n";
+            std::cerr << "3. Or set default remote: ./vcs set-remote <remote-url>\n";
             return;
         }
     
