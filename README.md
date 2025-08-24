@@ -1,43 +1,80 @@
-# 🗃️ File Version Control System (VCS) in C++
+# File Version Control System (FVCS)
 
-A lightweight Git-like version control system built from scratch in C++. This system supports core VCS features including staging, committing, branching, logging, diffs, and server-side remote functionality.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+![C++](https://img.shields.io/badge/C++-17-blue)
+![Python](https://img.shields.io/badge/Python-3.8+-green)
+![Flask](https://img.shields.io/badge/Flask-2.0-red)
 
----
-
-## ✨ Features
-
-- ✅ Initialize a repository (`init`)
-- ✅ Stage and commit files with messages
-- ✅ View commit history (`log`)
-- ✅ Checkout specific file versions by commit
-- ✅ Manage multiple branches
-- ✅ Detect and display file changes (`diff`)
-- ✅ Track per-file commit graphs using diffs
-- ✅ Start/Stop a local repository server
-- ✅ Clone, push to, and pull from remote repositories
+A lightweight, Git-inspired version control system for tracking file changes with local/remote collaboration capabilities.
 
 ---
 
-## 🛠️ CLI Commands
+## Features
 
-| Command                                | Description                                 |
-|----------------------------------------|---------------------------------------------|
-| `init`                                 | Initialize a new repository                 |
-| `add <filename>`                       | Stage a file                                |
-| `commit <message>`                     | Commit staged files with a message          |
-| `log`                                  | Show commit history                         |
-| `checkout <file> <commit>`             | Checkout a specific version of a file       |
-| `status`                               | Show repository status                      |
-| `createbranch <branch>`                | Create a new branch                         |
-| `switch <branch>`                      | Switch to another branch                    |
-| `current-branch`                       | Show the currently active branch            |
-| `branches`                             | List all branches                           |
-| `files`                                | List all tracked files                      |
-| `diff <filename>`                      | Show changes between staged and committed   |
-| `clone <remote> <local>`               | Clone a repository from a remote source     |
-| `push [remote]`                        | Push changes to a remote repository         |
-| `pull [remote]`                        | Pull changes from a remote repository       |
-| `start`                                | Start the repository server                 |
-| `stop`                                 | Stop the repository server                  |
+ **Core Version Control**  
+- Commit history with diffs  
+- Branching and merging  
+- Custom LCS-based diff algorithm  
+
+ **Remote Sync**  
+- `clone/push/pull` operations  
+- Flask server for repository hosting  
+- Atomic operations for consistency  
+
+**Efficient Storage**  
+- Incremental diffs (no redundant copies)  
+- Compressed metadata storage  
 
 ---
+
+## Installation
+
+### Prerequisites
+- C++17 compiler (GCC/Clang)
+- Python 3.8+ (for server)
+- OpenSSL (for SHA hashing)
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/FVCS.git
+cd FVCS
+
+# Start server (requires Flask)
+python3 server.py
+
+# Initialize repository
+./vcs init
+
+# Stage files
+./vcs add <filename>
+
+# Commit changes
+./vcs commit "message"
+
+# Branching
+./vcs createbranch feature-x
+./vcs switch feature-x
+
+# Remote operations (requires server)
+./vcs clone <remote_url> <dir>
+./vcs push
+./vcs pull
+```
+
+## Project Structure
+
+FVCS/
+
+├── vcs.cpp        # Core version control logic
+
+├── server.py      # Remote sync server (Flask)
+
+├── Makefile       # Build configuration
+
+├── .vcs/          # Local repository data
+
+│   ├── commits/   # Commit history
+
+│   └── staging/   # Staged files
+
+└── tests/         # Unit tests
